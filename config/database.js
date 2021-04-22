@@ -4,7 +4,7 @@ const dbConnection = () => {
     // credentials
     const dbUrl = 'localhost';
     const dbPort = '27017';
-    const database = 'SocialNetwork';
+    const database = 'MyDb';
 
     // options
     const options = {
