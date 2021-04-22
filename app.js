@@ -6,10 +6,6 @@ import logger from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
 import createError from 'http-errors';
 
-// Authentication
-import passport from 'passport';
-import session from "express-session";
-import flash from "express-flash";
 
 // Database
 import useDatabase from './config/database';
@@ -23,10 +19,6 @@ const app = express();
 // Connect to db
 useDatabase();
 
-// Init user auth
-import initializePassport from './config/passport-config';
-initializePassport();
-
 // view engine
 app.set('views', path.join(__dirname, '/App/Views'));
 app.set('view engine', 'jsx');
@@ -37,14 +29,6 @@ app.engine('jsx', require('express-react-views').createEngine(viewEngineOptions)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
-app.use(session({
-  secret: uuidv4(),
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(cookieParser());
 
 // Static file 

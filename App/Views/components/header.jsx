@@ -17,16 +17,13 @@ function Header(props) {
                                 <span className="sr-only">(current)</span>
                             </a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/about">About</a>
+                        </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
                         <li >
                             <SearchBar />
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/profile">Profile</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/auth/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
