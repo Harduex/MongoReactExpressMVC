@@ -5,7 +5,7 @@ import Layout from './layouts/layout';
 function Index(props) {
   return (
     <Layout title={props.title}>
-      <h1>{props.user}'s Feed</h1>
+      <h1>Hello {props.user}!</h1>
     </Layout>
   )
 }
