@@ -8,9 +8,6 @@ import { User } from '../Models/userModel';
 import { checkAuthenticated, checkNotAuthenticated } from '../../config/middlewares/authenticate';
 
 
-router.get('/register', checkNotAuthenticated, (req, res) => {
-    res.render('register', { message: 'Registration' });
-});
 router.post('/register', checkNotAuthenticated, async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -22,25 +19,22 @@ router.post('/register', checkNotAuthenticated, async (req, res) => {
 
     user.save()
         .then((data) => {
-            res.render('login', { message: 'User added' });
+            res.json({ message: 'User created' });
         })
         .catch((err) => {
-            res.render('register', { message: 'User already exist' });
+            res.json({ message: 'User already exist' });
         });
 });
 
-router.get('/login', checkNotAuthenticated, (req, res) => {
-    res.render('login', { message: 'Login' });
-});
 router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/home',
     failureRedirect: '/auth/login',
     failureFlash: true
 }));
 
 router.get('/logout', checkAuthenticated, (req, res) => {
     req.logOut();
-    res.redirect('/auth/login');
+    res.json({ authenticated: false });
 });
 
 

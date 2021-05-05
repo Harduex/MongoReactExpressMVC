@@ -2,12 +2,12 @@ function checkAuthenticated(request, response, next) {
     if (request.isAuthenticated()) {
         return next();
     }
-    response.redirect('/auth/login');
+    response.json({authenticated: false});
 }
 
 function checkNotAuthenticated(request, response, next) {
     if (request.isAuthenticated()) {
-        return response.redirect('/');
+        return response.json({authenticated: true});
     }
     return next();
 }

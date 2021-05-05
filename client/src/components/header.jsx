@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBar from './searchBar'
+
 
 function Header(props) {
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="javascript:;">{props?.title || 'Home'}</a>
+                <a className="navbar-brand" href="/">{props?.title || 'Home'}</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -19,9 +19,6 @@ function Header(props) {
                         </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
-                        <li >
-                            <SearchBar />
-                        </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/profile">Profile</a>
                         </li>

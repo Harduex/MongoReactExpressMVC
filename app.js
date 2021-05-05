@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
 import createError from 'http-errors';
+import cors from 'cors';
 
 // Authentication
 import passport from 'passport';
@@ -19,6 +20,7 @@ import useRouters from './routes';
 
 // Express app
 const app = express();
+app.use(cors());
 
 // Connect to db
 useDatabase();
