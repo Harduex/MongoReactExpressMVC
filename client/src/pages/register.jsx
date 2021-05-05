@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
 import queryString from 'query-string'
 
 
@@ -9,24 +10,29 @@ function Register(props) {
 
     return (
         <>
-            <form action="/auth/register" method="post">
-                <fieldset>
-                    {message && <legend>{message}</legend>}
-                    <div className="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" className="form-control" id="username" aria-describedby="username" placeholder="Enter Username" />
-                    </div>
-                    <div className="form-group">
-                        <label for="full-name">Full Name</label>
-                        <input type="text" name="fullName" className="form-control" id="username" aria-describedby="full-name" placeholder="Firstname Lastname" />
-                    </div>
-                    <div className="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" className="form-control" id="password" placeholder="Password" />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Registration</button>
-                </fieldset>
-            </form>
+            <Form action="/auth/register" method="post">
+
+                {message && <legend>{message}</legend>}
+
+                <Form.Group controlId="username">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" name="username" placeholder="Enter username" />
+                </Form.Group>
+
+                <Form.Group controlId="username">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control type="text" name="fullName" placeholder="Firstname Lastname" />
+                </Form.Group>
+
+                <Form.Group controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="password" placeholder="Password" />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">Registration</Button>
+
+            </Form>
+
             <Link to="/login">Sing In</Link>
         </>
     )
