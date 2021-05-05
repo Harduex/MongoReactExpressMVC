@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 function Header(props) {
     return (
@@ -12,18 +12,15 @@ function Header(props) {
                 <div className="collapse navbar-collapse" id="navbarColor02">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/">
+                            <Link to="/" className="nav-link">
                                 Home
                                 <span className="sr-only">(current)</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
                         <li className="nav-item">
-                            <a className="nav-link" href="/profile">Profile</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/auth/logout">Logout</a>
+                            <a className="nav-link" href="/login" onClick={async () => await fetch(`/auth/logout`)}>Logout</a>
                         </li>
                     </ul>
                 </div>

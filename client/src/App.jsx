@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles/App.scss';
+
+import Layout from './layouts/layout';
 import Login from './pages/login';
 import Register from './pages/register';
-import Layout from './layouts/layout';
+import Home from './pages/home';
 
 
 function App() {
   const [data, setData] = useState({});
-  const [login, setLogin] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -20,28 +22,15 @@ function App() {
   }, [])
 
   return (
-    <Layout>
-      {data?.authenticated === false ?
-        <>
-          {login ?
-            <>
-              <Login />
-              <button class="btn btn-link p-0" onClick={() => setLogin(false)}>Sing up</button>
-            </>
-            :
-            <>
-              <Register />
-              <button class="btn btn-link p-0" onClick={() => setLogin(true)}>Sing in</button>
-            </>
-          }
-        </>
-        :
-        <>
-          <h1>Hello, {data?.user}!</h1>
-          <button onClick={async () => await fetch(`/auth/logout`)}>Logout</button>
-        </>
-      }
-    </Layout>
+    <Router>
+      <Layout>
+        <Switch>
+          <Route path="/" exact render={() => <Home data={data} />} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </Layout>
+    </Router>
   );
 }
 

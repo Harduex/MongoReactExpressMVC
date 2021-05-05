@@ -19,16 +19,19 @@ router.post('/register', checkNotAuthenticated, async (req, res) => {
 
     user.save()
         .then((data) => {
-            res.json({ message: 'User created' });
+            // res.json({ success: true, message: 'User created' });
+            res.redirect('/login');
         })
         .catch((err) => {
-            res.json({ message: 'User already exist' });
+            const message = 'User already exist';
+            res.redirect(`/register?message=${message}`);
+            // res.json({ success: false, message: 'User already exist' });
         });
 });
 
 router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/auth/login',
+    successRedirect: '/',
+    failureRedirect: '/login',
     failureFlash: true
 }));
 

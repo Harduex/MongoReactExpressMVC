@@ -1,13 +1,13 @@
-function checkAuthenticated(request, response, next) {
-    if (request.isAuthenticated()) {
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
         return next();
     }
-    response.json({authenticated: false});
+    res.json({ authenticated: false });
 }
 
-function checkNotAuthenticated(request, response, next) {
-    if (request.isAuthenticated()) {
-        return response.json({authenticated: true});
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.json({ authenticated: true });
     }
     return next();
 }
