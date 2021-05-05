@@ -11,13 +11,13 @@ function Header(props) {
                     <Nav.Link href="/">App</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Link className="nav-link" to="/">Home</Link>
                 </Nav.Item>
                 <Nav.Item className="ml-auto">
                     <Nav.Link href="/login" onClick={async () => await fetch(`/auth/logout`)}>Logout</Nav.Link>
                 </Nav.Item>
             </Nav>
-        </header>
+        </header >
     )
 }
 
