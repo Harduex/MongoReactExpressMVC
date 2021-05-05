@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Login(props) {
+
+    const [message, setMessage] = useState();
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(`/auth/login`);
+            const json = await response.json();
+            setMessage(json.message);
+        }
+        fetchData();
+    }, [])
+
     return (
         <>
             <form action="/auth/login" method="post">
                 <fieldset>
-                    <legend>{props.message}</legend>
+                    {message && <legend>{message}</legend>}
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Username</label>
                         <input type="text" name="username" className="form-control" id="username" aria-describedby="username" placeholder="Enter Username" />
