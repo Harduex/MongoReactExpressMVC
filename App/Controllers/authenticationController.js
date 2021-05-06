@@ -19,11 +19,11 @@ router.post('/register', checkNotAuthenticated, async (req, res) => {
 
     user.save()
         .then((data) => {
-            res.redirect('/login');
+            res.redirect('/auth/login');
         })
         .catch((err) => {
             const message = 'User already exist';
-            res.redirect(`/register?message=${message}`);
+            res.json({ message: message });
         });
 });
 
@@ -33,7 +33,7 @@ router.get('/login', checkNotAuthenticated, (req, res) => {
 
 router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: `/login`,
+    failureRedirect: `/auth/login`,
     failureFlash: true
 }));
 

@@ -6,10 +6,9 @@ import { useQuery } from 'react-query';
 import axios from "axios";
 
 async function fetchMessage() {
-    const res = await fetch(`/auth/login`);
-    return res.json();
+    const { data } = await axios.get(`/auth/login`);
+    return data;
 }
-
 
 function Login(props) {
 
