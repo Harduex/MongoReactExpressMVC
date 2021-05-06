@@ -1,38 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
+import { useQuery } from 'react-query';
+import axios from "axios";
+
+async function fetchMessage() {
+    const res = await fetch(`/auth/login`);
+    return res.json();
+}
+
+
 function Login(props) {
 
-    const [message, setMessage] = useState();
+    const { data, refetch } = useQuery('login-message', fetchMessage);
+    const [state, setState] = useState({ username: '', password: '' });
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch(`/auth/login`);
-            const json = await response.json();
-            setMessage(json.message);
-        }
-        fetchData();
-    }, [])
+    function handleChange(e) {
+        setState({ ...state, [e.target.name]: e.target.value });
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        axios.post('/auth/login', state)
+            .then(function (response) {
+                props.history.push('/');
+            })
+            .catch(function (error) {
+                refetch();
+            });
+    }
+
 
     return (
         <>
-            <Form action="/auth/login" method="post">
+            <Form action="/auth/login" method="post" onSubmit={handleSubmit}>
 
-                {message && <legend>{message}</legend>}
+                {data?.message && <legend>{data?.message}</legend>}
 
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" name="username" placeholder="Enter username" />
+                    <Form.Control type="text" name="username" placeholder="Enter username" value={state.username} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="Password" />
+                    <Form.Control type="password" name="password" placeholder="Password" value={state.password} onChange={handleChange} />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">Log in</Button>
-                
+
             </Form>
             <Link to="/register">Sing Up</Link>
         </>

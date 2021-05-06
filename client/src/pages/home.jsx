@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../styles/modules/Home.module.scss';
 
 
-function Home(props) {
+function Home({ refetch, user }) {
 
-    if (props?.data?.user) {
-        return <h1>Hello, {props?.data?.user}!</h1>
+    useEffect(() => {
+        refetch();
+    }, [refetch])
+
+    if (user?.fullName) {
+        return (
+            <div className={styles.home}>
+                <h1>Hello, {user?.fullName}!</h1>
+            </div>
+        )
     }
-    return <h1>You must <Link to="/login">log in</Link> first!</h1>
+
+    return (
+        <div className={styles.home}>
+            <h1>You must <Link to="/login">log in</Link> first!</h1>
+        </div>
+    )
 }
 
 

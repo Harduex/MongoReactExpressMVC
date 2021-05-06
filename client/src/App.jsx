@@ -1,36 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './styles/App.scss';
+import { useQuery } from 'react-query';
+import axios from "axios";
 
-import Layout from './layouts/layout';
-import Login from './pages/login';
-import Register from './pages/register';
-import Home from './pages/home';
+// Pages
+import Layout from './layouts/Layout';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
 
+
+async function fetchUser() {
+  const { data } = await axios.get(`/user`);
+  return data;
+}
 
 function App() {
-  const [data, setData] = useState({});
+  const { data, status, refetch } = useQuery('user', fetchUser);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/home`);
-      const json = await response.json();
-      console.log(json);
-      setData(json);
-    }
-    fetchData();
-  }, [])
+  if (status === 'loading') {
+    return <h1>Loading...</h1>
+  }
 
   return (
-    <Router>
-      <Layout>
-        <Switch>
-          <Route path="/" exact render={() => <Home data={data} />} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Switch>
-      </Layout>
-    </Router>
+    <>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route path="/" exact render={() => <Home user={data} refetch={refetch} />} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Switch>
+        </Layout>
+      </Router>
+    </>
   );
 }
 

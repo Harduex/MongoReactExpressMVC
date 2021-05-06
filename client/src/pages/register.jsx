@@ -19,7 +19,7 @@ function Register(props) {
                     <Form.Control type="text" name="username" placeholder="Enter username" />
                 </Form.Group>
 
-                <Form.Group controlId="username">
+                <Form.Group controlId="fullName">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control type="text" name="fullName" placeholder="Firstname Lastname" />
                 </Form.Group>

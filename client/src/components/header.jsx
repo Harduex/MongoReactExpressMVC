@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
+import axios from 'axios';
 
 
 function Header(props) {
@@ -14,7 +15,7 @@ function Header(props) {
                     <Link className="nav-link" to="/">Home</Link>
                 </Nav.Item>
                 <Nav.Item className="ml-auto">
-                    <Nav.Link href="/login" onClick={async () => await fetch(`/auth/logout`)}>Logout</Nav.Link>
+                    <Nav.Link href="/login" onClick={async () => await axios(`/auth/logout`)}>Logout</Nav.Link>
                 </Nav.Item>
             </Nav>
         </header >
