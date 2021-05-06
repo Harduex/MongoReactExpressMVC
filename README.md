@@ -38,10 +38,10 @@ Navigate to http://localhost:3000
 
 🥳 *Now you're ready to rock!* 🥳
 
-## Side note
+## Side notes
 Framework is preconfigured with local user authentication using Passport.js\
-If you don't need authentication switch to branch **clean-starter**
-
+If you don't need authentication switch to branch **clean-starter**\
+If you want to use react client side rendering and express api switch to branch **react-client+express-api** 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
