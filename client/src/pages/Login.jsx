@@ -22,11 +22,13 @@ function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        axios.post('/auth/login', state)
+        axios.post(`/auth/login`, state)
             .then(function (response) {
+                console.log(response);
                 props.history.push('/');
             })
             .catch(function (error) {
+                console.log(error);
                 refetch();
             });
     }

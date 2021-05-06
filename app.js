@@ -6,6 +6,7 @@ import logger from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
 import createError from 'http-errors';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 // Authentication
 import passport from 'passport';
@@ -18,9 +19,14 @@ import useDatabase from './config/database';
 // Router import
 import useRouters from './routes';
 
+// .env
+dotenv.config();
+
 // Express app
 const app = express();
-app.use(cors());
+
+// Cors
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 
 // Connect to db
 useDatabase();
