@@ -5,14 +5,15 @@ import { Button, Form } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import axios from "axios";
 
-async function fetchMessage() {
-    const { data } = await axios.get(`/auth/login`);
-    return data;
-}
+// async function fetchMessage() {
+//     const { data } = await axios.get(`/auth/login`);
+//     return data;
+// }
 
 function Login(props) {
 
-    const { data, refetch } = useQuery('login-message', fetchMessage);
+    // const { data, refetch } = useQuery('login-message', fetchMessage);
+    const [message, setMessage] = useState('');
     const [state, setState] = useState({ username: '', password: '' });
 
     function handleChange(e) {
@@ -22,13 +23,15 @@ function Login(props) {
     function handleSubmit(e) {
         e.preventDefault();
         axios.post(`/auth/login`, state)
-            .then(function (response) {
-                console.log(response);
-                props.history.push('/');
+            .then(function (res) {
+                if (res.data.message) {
+                    setMessage(res.data.message);
+                } else {
+                    props.history.push('/');
+                }
             })
-            .catch(function (error) {
-                console.log(error);
-                refetch();
+            .catch(function (err) {
+                console.log(err);
             });
     }
 
@@ -37,8 +40,7 @@ function Login(props) {
         <>
             <Form action="/auth/login" method="post" onSubmit={handleSubmit}>
 
-                {data?.message && <legend>{data?.message}</legend>}
-
+                {message && <legend>{message}</legend>}
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="text" name="username" placeholder="Enter username" value={state.username} onChange={handleChange} />

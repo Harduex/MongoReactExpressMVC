@@ -22,7 +22,6 @@ function Register(props) {
             .then(function (res) {
                 if (res.data.message) {
                     setMessage(res.data.message);
-                    console.log(res);
                 } else {
                     props.history.push('/login');
                 }
