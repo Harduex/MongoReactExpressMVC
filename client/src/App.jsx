@@ -12,8 +12,10 @@ import Home from './pages/Home';
 
 async function fetchUser() {
   const { data } = await axios.get(`/user`);
+  console.table(data);
   return data;
 }
+
 
 function App() {
   const { data, status, refetch } = useQuery('user', fetchUser);
@@ -21,6 +23,7 @@ function App() {
   if (status === 'loading') {
     return <h1>Loading...</h1>
   }
+
 
   return (
     <>
