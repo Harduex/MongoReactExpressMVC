@@ -3,15 +3,17 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import { v4 as uuidv4 } from 'uuid';
 import createError from 'http-errors';
-
+import dotenv from 'dotenv';
 
 // Database
 import useDatabase from './config/database';
 
 // Router import
 import useRouters from './routes';
+
+// .env
+dotenv.config();
 
 // Express app
 const app = express();
