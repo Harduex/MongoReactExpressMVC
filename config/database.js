@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const dbConnection = () => {
     // credentials
-    const dbUrl = 'localhost';
-    const dbPort = '27017';
-    const database = 'MyDb';
+    const dbUrl = process.env.DB_URL || 'localhost';
+    const dbPort = process.env.DB_PORT || '27017';
+    const database = process.env.DATABASE || 'MyDb';
 
     // options
     const options = {
